@@ -27,7 +27,7 @@ public class TP2_Bieres_DANGELO {
     //unesecondBiere.brasserie = "Abbaye de Leffe";
     //unesecondBiere.lireEtiquette();
     public static void main(String[] args) {
-        BouteilleBiere uneBiere = new BouteilleBiere("Cuvée des trolls", 7.0 ,"Dubuisson") ;
+        BouteilleBiere uneBiere = new BouteilleBiere("Cuvee des trolls", 7.0 ,"Dubuisson") ;
         BouteilleBiere unesecondBiere = new BouteilleBiere("Leffe", 6.6 ,"Abbaye de Leffe") ; 
         BouteilleBiere unetroisBiere = new BouteilleBiere("Ciel", 6.8 ,"Bordeaux") ; 
         BouteilleBiere unequatreBiere = new BouteilleBiere("Amour", 6.0 ,"Provence") ; 
@@ -37,6 +37,7 @@ public class TP2_Bieres_DANGELO {
         unetroisBiere.lireEtiquette();
         unequatreBiere.lireEtiquette();
         unecinqBiere.lireEtiquette();
+        System.out.println(uneBiere) ; 
         
     }
     
