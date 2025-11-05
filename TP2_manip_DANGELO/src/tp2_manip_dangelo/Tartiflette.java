@@ -10,4 +10,8 @@ package tp2_manip_dangelo;
  */
 public class Tartiflette {
     int nbCalories;
+    
+    public Tartiflette(int cal){
+        nbCalories = cal ;
+    }
 }

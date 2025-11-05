@@ -18,7 +18,7 @@ public class TP2_manip_DANGELO {
         Tartiflette assiette2 = new Tartiflette(600) ; 
         Tartiflette assiette3 = assiette2 ; 
         System.out.println("nb de calories de Assiette 2 : " + assiette2.nbCalories) ; 
-        System.out.println("nb de calories de Assiette 3 : " + 3.nbCalories) ; 
+        System.out.println("nb de calories de Assiette 3 : " + assiette3.nbCalories) ; 
     }
     
 }
