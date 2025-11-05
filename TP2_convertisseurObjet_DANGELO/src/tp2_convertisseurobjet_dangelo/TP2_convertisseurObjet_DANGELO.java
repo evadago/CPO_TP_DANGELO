@@ -17,20 +17,21 @@ public class TP2_convertisseurObjet_DANGELO {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int operateur;
-        double temperature;
-        System.out.println("Entrer une valeur :");
-        temperature = sc.nextDouble();
-        System.out.println(" Saisissez la conversion que vous souhaiter effectuer: ");
-        System.out.println(" 1) De Celcius vers Kelvin ");
-        System.out.println(" 2) De Kelvin vers Celcius  ");
-        System.out.println(" 3) De Farenheit vers Kelvin ");
-        System.out.println(" 4) De kelvin vers Farenheit ");
-        System.out.println(" 5) De Farenheit vers Celcius ");
-        System.out.println(" 6) De Celcius vers Farenheit ");
-        operateur = sc.nextInt();
-        Convertisseur temperature = new Convertisseur(operateur);
+        
+        Convertisseur conv1 = new Convertisseur();
+        Convertisseur conv2 = new Convertisseur();
+        
+        System.out.println( "7.1 degre Celcius donne " + conv1.CelciusVersKelvin(7.1) + " K" ) ;
+        System.out.println( "34.0 degre Farenheit donne " + conv1.FarenheitVersCelcius(34.2) + " degre Celcius" );
+        System.out.println( " 265.0 K donne " + conv1.KelvinVersFarenheit(265.0) + " degre Farenheit" ) ;
+       
+        System.out.println( "6.8 degre Celcius donne " + conv2.CelciusVersFarenheit(6.8) + " degre Farenheit" ) ;
+        System.out.println( "71.5 degre Farenheit donne " + conv2.FarenheitVersKelvin(71.5) + " K" ) ;
+        System.out.println( " 294.3 K donne " + conv2.KelvinVersCelcius(294.3) + " degre Celcius" ) ;
+       
+        System.out.println(conv1);
+        System.out.println(conv2) ;
+        
     }
     
 }
