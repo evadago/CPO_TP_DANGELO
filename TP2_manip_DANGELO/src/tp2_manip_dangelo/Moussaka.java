@@ -10,4 +10,7 @@ package tp2_manip_dangelo;
  */
 public class Moussaka {
     int nbCalories;
+    public Moussaka(int cal){
+        nbCalories = cal ;
+    }
 }
