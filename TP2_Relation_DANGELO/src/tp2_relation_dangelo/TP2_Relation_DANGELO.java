@@ -50,6 +50,6 @@ public class TP2_Relation_DANGELO {
         System.out.println("la deuxieme voiture de Reno est " +reno.liste_voitures[1] ) ;
     }  
 }
-    }
     
-}
+    
+
