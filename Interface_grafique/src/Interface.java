@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,9 +14,25 @@ public class Interface extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interface.class.getName());
     
-    int compteur=0;
-    boolean reponse;
-
+    
+    ArrayList<Question> Question = new ArrayList<>();
+    
+    private int indexQuestionCourante = 0;
+    
+    private void afficherQuestionCourante(){
+        Question q = Question.get(indexQuestionCourante);
+        Intitule_question.setText(q.getIntitule());
+        
+        P1.setText(q.getP1());
+        P2.setText(q.getP2());
+        P3.setText(q.getP3());
+        P4.setText(q.getP4());
+        
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true); 
+    }
     /**
      * Creates new form Interface
      */
@@ -25,7 +44,8 @@ public class Interface extends javax.swing.JFrame {
         P3.setVisible(true);
         P4.setVisible(true);      
         
-        ArrayList<Question> Question = new ArrayList<>();
+        
+        
         Question.add(new Question("Quel est le plus grand océan du monde ?","A. Océan Indien","B. Océan Atlantique","C. Océan Arctique","D. Océan Pacifique",1)); 
         Question.add(new Question("Quel est le plus grand océan du monde ?", "A. Océan Indien", "B. Océan Atlantique", "C. Océan Arctique", "D. Océan Pacifique", 4));
         Question.add(new Question("Quelle est la capitale de l’Espagne ?", "A. Lisbonne", "B. Barcelone", "C. Valence", "D. Madrid", 4));
@@ -78,6 +98,9 @@ public class Interface extends javax.swing.JFrame {
         Question.add(new Question("Quel sport se joue avec un ballon rond ?", "A. Tennis", "B. Football", "C. Golf", "D. Boxe", 2));
         Question.add(new Question("Quelle boisson est fabriquée à partir de raisins ?", "A. Eau", "B. Vin", "C. Lait", "D. Jus d’orange", 2));
 
+        
+        
+       
     }
     
     
@@ -147,40 +170,22 @@ public class Interface extends javax.swing.JFrame {
 
     private void P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P1ActionPerformed
         // TODO add your handling code here:
-        if (reponse==true) { 
-            Message_feedback.setText("HELLO");
-            }else{
-            Message_feedback.setText("HELLO");
-            }
-        } 
-        P1.setEnabled(false);
+       
     }//GEN-LAST:event_P1ActionPerformed
 
     private void P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ActionPerformed
         // TODO add your handling code here:
-        if (reponse==true) { 
-            Message_feedback.setText("HELLO");
-            }else{
-            Message_feedback.setText("HELLO");
-            }
+       
     }//GEN-LAST:event_P2ActionPerformed
 
     private void P3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P3ActionPerformed
         // TODO add your handling code here:
-        if (reponse==true) { 
-            Message_feedback.setText("HELLO");
-            }else{
-            Message_feedback.setText("HELLO");
-            }
+        
     }//GEN-LAST:event_P3ActionPerformed
 
     private void P4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P4ActionPerformed
         // TODO add your handling code here:
-        if (reponse==true) { 
-            Message_feedback.setText("HELLO");
-            }else{
-            Message_feedback.setText("HELLO");
-            }
+        
     }//GEN-LAST:event_P4ActionPerformed
 
     /**
@@ -207,7 +212,6 @@ public class Interface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Interface().setVisible(true));
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Intitule_question;
     private javax.swing.JLabel Message_feedback;
