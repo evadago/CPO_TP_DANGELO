@@ -17,6 +17,7 @@ public class Interface extends javax.swing.JFrame {
     
     ArrayList<Question> Question = new ArrayList<>();
     
+    int score=0;
     private int indexQuestionCourante = 0;
     
     private void afficherQuestionCourante(){
@@ -103,7 +104,20 @@ public class Interface extends javax.swing.JFrame {
        
     }
     
+    private void verifierReponse(int choixUtilisateur) {
     
+        if (choixUtilisateur == Question.getindexBonneReponse()) {
+            Message_feedback.setText("Bonne réponse !");
+            score++;
+        } else {
+            Message_feedback.setText("Mauvaise réponse...");
+        }
+
+    
+   
+    
+}
+
             
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,22 +184,27 @@ public class Interface extends javax.swing.JFrame {
 
     private void P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P1ActionPerformed
         // TODO add your handling code here:
+        verifierReponse(1);
+        P1.setEnabled(false);
        
     }//GEN-LAST:event_P1ActionPerformed
 
     private void P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ActionPerformed
         // TODO add your handling code here:
-       
+        verifierReponse(2);
+        P2.setEnabled(false);
     }//GEN-LAST:event_P2ActionPerformed
 
     private void P3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P3ActionPerformed
         // TODO add your handling code here:
-        
+        verifierReponse(3);
+        P3.setEnabled(false);
     }//GEN-LAST:event_P3ActionPerformed
 
     private void P4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P4ActionPerformed
         // TODO add your handling code here:
-        
+        verifierReponse(4);
+        P4.setEnabled(false);
     }//GEN-LAST:event_P4ActionPerformed
 
     /**
@@ -220,4 +239,4 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton P3;
     private javax.swing.JButton P4;
     // End of variables declaration//GEN-END:variables
-
+}
