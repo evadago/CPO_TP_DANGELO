@@ -8,6 +8,8 @@
  * @author evada
  */
 public class NewJFrame extends javax.swing.JFrame {
+    private final int[] tentative = new int[4];
+    Combinaisons combinaisonSecrete = new Combinaisons();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame.class.getName());
 
@@ -17,7 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +51,7 @@ public class NewJFrame extends javax.swing.JFrame {
         texte_score = new javax.swing.JLabel();
         texte_tentatives = new javax.swing.JLabel();
         bouton_recommencer = new javax.swing.JButton();
+        bouton_valide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,14 +162,24 @@ public class NewJFrame extends javax.swing.JFrame {
                         bouton_recommencer.setText("jButton1");
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
+                        bouton_valide.setText("jButton1");
+                        bouton_valide.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bouton_valideActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(bouton_valide, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_1ActionPerformed
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_0.getText());
         if (value > 0) {
+            value++;
             texte_chiffre_0.setText(String.valueOf(value - 1));
+            tentative[0] = value;
         }
 
     }//GEN-LAST:event_down_chiffre_1ActionPerformed
@@ -175,7 +188,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_0.getText());
         if (value < 9) {
+            value++;
             texte_chiffre_0.setText(String.valueOf(value + 1));
+            tentative[0] = value;
         }
     }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
@@ -183,7 +198,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_1.getText());
         if (value < 9) {
+            value++;
             texte_chiffre_1.setText(String.valueOf(value + 1));
+            tentative[1] = value;
         }
     }//GEN-LAST:event_up_chiffre_2ActionPerformed
 
@@ -191,7 +208,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_2.getText());
         if (value < 9) {
+            value++;
             texte_chiffre_2.setText(String.valueOf(value + 1));
+            tentative[2] = value;
         }
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
@@ -199,7 +218,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_3.getText());
         if (value < 9) {
+            value++;
             texte_chiffre_3.setText(String.valueOf(value + 1));
+            tentative[3] = value;
         }
     }//GEN-LAST:event_up_chiffre_4ActionPerformed
 
@@ -207,7 +228,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_1.getText());
         if (value > 0) {
+            value++;
             texte_chiffre_1.setText(String.valueOf(value - 1));
+            tentative[1] = value;
         }
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
@@ -215,7 +238,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_2.getText());
         if (value > 0) {
+            value++;
             texte_chiffre_2.setText(String.valueOf(value - 1));
+            tentative[2] = value;
         }
     }//GEN-LAST:event_down_chiffre_3ActionPerformed
 
@@ -223,9 +248,33 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_3.getText());
         if (value > 0) {
+            value++;
             texte_chiffre_3.setText(String.valueOf(value - 1));
+            tentative[3] = value;
         }
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
+
+    private void bouton_valideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_valideActionPerformed
+        // TODO add your handling code here:
+        int[] code = combinaisonSecrete.getChiffres();
+
+        StringBuilder monter = new StringBuilder();
+        StringBuilder descendre = new StringBuilder();
+
+        for (int i = 0; i < code.length; i++) {
+            if (tentative[i] < code[i]) {
+                monter.append("chiffre ").append(i+1).append(" ");
+            } else if (tentative[i] > code[i]) {
+                descendre.append("chiffre ").append(i+1).append(" ");
+            }
+        }
+
+        texte_lbl_nb_chiffres_haut.setText("A monter ");
+        texte_lbl_nb_chiffres_bas.setText("A descendre ");
+        texte_nb_chiffres_haut.setText(monter.toString());
+        texte_nb_chiffres_bas.setText(descendre.toString());
+    
+    }//GEN-LAST:event_bouton_valideActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +296,10 @@ public class NewJFrame extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        
+
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new NewJFrame().setVisible(true));
@@ -254,6 +307,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bouton_recommencer;
+    private javax.swing.JButton bouton_valide;
     private javax.swing.JButton down_chiffre_1;
     private javax.swing.JButton down_chiffre_2;
     private javax.swing.JButton down_chiffre_3;
