@@ -8,7 +8,7 @@
  * @author evada
  */
 public class NewJFrame extends javax.swing.JFrame {
-    private final int[] tentative = new int[4];
+    private int[] tentative = new int[4];
     Combinaisons combinaisonSecrete = new Combinaisons();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame.class.getName());
@@ -162,7 +162,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         bouton_recommencer.setText("jButton1");
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-                        bouton_valide.setText("jButton1");
+                        bouton_valide.setText("Validé");
                         bouton_valide.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 bouton_valideActionPerformed(evt);
@@ -177,9 +177,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_0.getText());
         if (value > 0) {
-            value++;
+           
             texte_chiffre_0.setText(String.valueOf(value - 1));
-            tentative[0] = value;
+            
         }
 
     }//GEN-LAST:event_down_chiffre_1ActionPerformed
@@ -188,9 +188,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_0.getText());
         if (value < 9) {
-            value++;
+            
             texte_chiffre_0.setText(String.valueOf(value + 1));
-            tentative[0] = value;
+            
         }
     }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
@@ -198,9 +198,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_1.getText());
         if (value < 9) {
-            value++;
+           
             texte_chiffre_1.setText(String.valueOf(value + 1));
-            tentative[1] = value;
+            
         }
     }//GEN-LAST:event_up_chiffre_2ActionPerformed
 
@@ -208,9 +208,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_2.getText());
         if (value < 9) {
-            value++;
+            
             texte_chiffre_2.setText(String.valueOf(value + 1));
-            tentative[2] = value;
+            
         }
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
@@ -218,9 +218,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_3.getText());
         if (value < 9) {
-            value++;
+            
             texte_chiffre_3.setText(String.valueOf(value + 1));
-            tentative[3] = value;
+            
         }
     }//GEN-LAST:event_up_chiffre_4ActionPerformed
 
@@ -228,9 +228,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_1.getText());
         if (value > 0) {
-            value++;
+            
             texte_chiffre_1.setText(String.valueOf(value - 1));
-            tentative[1] = value;
+            
         }
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
@@ -238,9 +238,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_2.getText());
         if (value > 0) {
-            value++;
+            
             texte_chiffre_2.setText(String.valueOf(value - 1));
-            tentative[2] = value;
+            
         }
     }//GEN-LAST:event_down_chiffre_3ActionPerformed
 
@@ -248,31 +248,66 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_3.getText());
         if (value > 0) {
-            value++;
+            
             texte_chiffre_3.setText(String.valueOf(value - 1));
-            tentative[3] = value;
+            
         }
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void bouton_valideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_valideActionPerformed
         // TODO add your handling code here:
         int[] code = combinaisonSecrete.getChiffres();
+        int essais = 0;
+        int maxEssais = 10;
+        int score = 0;
+        
+
 
         StringBuilder monter = new StringBuilder();
         StringBuilder descendre = new StringBuilder();
+        StringBuilder exact = new StringBuilder();
+       
+        tentative[0] = Integer.parseInt(texte_chiffre_0.getText());
+        tentative[1] = Integer.parseInt(texte_chiffre_1.getText());
+        tentative[2] = Integer.parseInt(texte_chiffre_2.getText());
+        tentative[3] = Integer.parseInt(texte_chiffre_3.getText());
+        essais++;
+
 
         for (int i = 0; i < code.length; i++) {
             if (tentative[i] < code[i]) {
                 monter.append("chiffre ").append(i+1).append(" ");
             } else if (tentative[i] > code[i]) {
                 descendre.append("chiffre ").append(i+1).append(" ");
+            } else {
+                exact.append("chiffre ").append(i+1).append(" ");
             }
         }
+        if (combinaisonSecrete.verifier(tentative)) {
+            texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
+            bouton_valide.setEnabled(false);
+            score += 1;
+            texte_score.setText("Score :" +score);
+        } else if (essais >= maxEssais) {
+            texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
+            bouton_valide.setEnabled(false);
+            score += 0;
+            texte_score.setText(String.valueOf("Score :" +score));
+            
+        } else {
+            texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
+            
+        }
 
-        texte_lbl_nb_chiffres_haut.setText("A monter ");
-        texte_lbl_nb_chiffres_bas.setText("A descendre ");
+
+
+
+        texte_lbl_nb_chiffres_haut.setText("A monter :");
+        texte_lbl_nb_chiffres_bas.setText("A descendre :");
+        texte_lbl_nb_chiffres_exacts.setText("Chiffres exacts :");
         texte_nb_chiffres_haut.setText(monter.toString());
         texte_nb_chiffres_bas.setText(descendre.toString());
+        texte_nb_chiffres_exacts.setText(exact.toString());
     
     }//GEN-LAST:event_bouton_valideActionPerformed
 
