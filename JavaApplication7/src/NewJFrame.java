@@ -9,6 +9,8 @@
  */
 public class NewJFrame extends javax.swing.JFrame {
     private int[] tentative = new int[4];
+    private int essais = 0;
+    private final int maxEssais = 10;
     Combinaisons combinaisonSecrete = new Combinaisons();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame.class.getName());
@@ -257,10 +259,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private void bouton_valideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_valideActionPerformed
         // TODO add your handling code here:
         int[] code = combinaisonSecrete.getChiffres();
-        int essais = 0;
-        int maxEssais = 10;
-        int score = 0;
         
+        int score = 0;
+        essais++;
 
 
         StringBuilder monter = new StringBuilder();
@@ -271,16 +272,16 @@ public class NewJFrame extends javax.swing.JFrame {
         tentative[1] = Integer.parseInt(texte_chiffre_1.getText());
         tentative[2] = Integer.parseInt(texte_chiffre_2.getText());
         tentative[3] = Integer.parseInt(texte_chiffre_3.getText());
-        essais++;
+       
 
 
         for (int i = 0; i < code.length; i++) {
             if (tentative[i] < code[i]) {
-                monter.append("chiffre ").append(i+1).append(" ");
+                monter.append("C").append(i+1).append(" ");
             } else if (tentative[i] > code[i]) {
-                descendre.append("chiffre ").append(i+1).append(" ");
+                descendre.append("C").append(i+1).append(" ");
             } else {
-                exact.append("chiffre ").append(i+1).append(" ");
+                exact.append("C").append(i+1).append(" ");
             }
         }
         if (combinaisonSecrete.verifier(tentative)) {
@@ -308,6 +309,9 @@ public class NewJFrame extends javax.swing.JFrame {
         texte_nb_chiffres_haut.setText(monter.toString());
         texte_nb_chiffres_bas.setText(descendre.toString());
         texte_nb_chiffres_exacts.setText(exact.toString());
+        
+       
+        
     
     }//GEN-LAST:event_bouton_valideActionPerformed
 
