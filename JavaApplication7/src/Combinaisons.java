@@ -10,6 +10,8 @@ import java.util.Random;
  */
 public class Combinaisons {
     private int[] chiffres = new int[4]; // tableau de 4 chiffres
+    
+  
 
     public Combinaisons() {
         Random rand = new Random();
