@@ -263,8 +263,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void bouton_valideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_valideActionPerformed
         // TODO add your handling code here:
         int[] code = combinaisonSecrete.getChiffres();
-        
-       
+               
         essais++;
 
         StringBuilder monter = new StringBuilder();
@@ -307,10 +306,7 @@ public class NewJFrame extends javax.swing.JFrame {
         texte_nb_chiffres_haut.setText(monter.toString());
         texte_nb_chiffres_bas.setText(descendre.toString());
         texte_nb_chiffres_exacts.setText(exact.toString());
-        
-       
-        
-    
+      
     }//GEN-LAST:event_bouton_valideActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
@@ -323,7 +319,7 @@ public class NewJFrame extends javax.swing.JFrame {
         texte_chiffre_3.setText("0");
 
         // Générer une nouvelle combinaison secrète
-        combinaisonSecrete = new Combinaisons(); // ou ta méthode pour recréer le code
+        combinaisonSecrete = new Combinaisons(); 
 
         // Réinitialiser le tableau tentative
         tentative = new int[4];
