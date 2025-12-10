@@ -12,6 +12,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private int essais = 0;
     private final int maxEssais = 10;
     Combinaisons combinaisonSecrete = new Combinaisons();
+    int score = 0;
+    
+
+    
+   
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame.class.getName());
 
@@ -58,8 +63,8 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        texte_intro.setText("texte_intro");
-        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 37, -1));
+        texte_intro.setText("Trouve la bonne combinaison....");
+        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 180, -1));
 
         up_chiffre_1.setText("/\\");
             up_chiffre_1.addActionListener(new java.awt.event.ActionListener() {
@@ -137,29 +142,23 @@ public class NewJFrame extends javax.swing.JFrame {
                         });
                         getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
-                        texte_lbl_nb_chiffres_exacts.setText("texte_lbl_nb_chiffres_exacts");
-                        getContentPane().add(texte_lbl_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+                        texte_lbl_nb_chiffres_exacts.setText("Chiffres exacts :");
+                        getContentPane().add(texte_lbl_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 120, 20));
 
-                        texte_nb_chiffres_exacts.setText("texte_nb_chiffres_exacts");
-                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
+                        texte_lbl_nb_chiffres_haut.setText("A monter :");
+                        getContentPane().add(texte_lbl_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, 20));
 
-                        texte_lbl_nb_chiffres_haut.setText("texte_lbl_nb_chiffres_haut");
-                        getContentPane().add(texte_lbl_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
+                        texte_lbl_nb_chiffres_bas.setText("A descendre :");
+                        getContentPane().add(texte_lbl_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 110, 20));
 
-                        texte_nb_chiffres_haut.setText("texte_nb_chiffres_haut");
-                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
+                        texte_score.setText("Score :");
+                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
-                        texte_lbl_nb_chiffres_bas.setText("texte_lbl_nb_chiffres_bas");
-                        getContentPane().add(texte_lbl_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
-
-                        texte_nb_chiffres_bas.setText("texte_nb_chiffres_bas");
-                        getContentPane().add(texte_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
-
-                        texte_score.setText("texte_score");
-                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, -1, -1));
-
-                        texte_tentatives.setText("texte_tentatives");
-                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+                        texte_tentatives.setText("Tentative :");
+                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, -1, -1));
 
                         bouton_recommencer.setText("Recommencer");
                         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +178,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
-    
+        
     private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_1ActionPerformed
         // TODO add your handling code here:
         int value = Integer.parseInt(texte_chiffre_0.getText());
@@ -265,9 +264,8 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int[] code = combinaisonSecrete.getChiffres();
         
-        int score = 0;
+       
         essais++;
-
 
         StringBuilder monter = new StringBuilder();
         StringBuilder descendre = new StringBuilder();
@@ -278,8 +276,6 @@ public class NewJFrame extends javax.swing.JFrame {
         tentative[2] = Integer.parseInt(texte_chiffre_2.getText());
         tentative[3] = Integer.parseInt(texte_chiffre_3.getText());
        
-
-
         for (int i = 0; i < code.length; i++) {
             if (tentative[i] < code[i]) {
                 monter.append("C").append(i+1).append(" ");
@@ -289,24 +285,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 exact.append("C").append(i+1).append(" ");
             }
         }
+
         if (combinaisonSecrete.verifier(tentative)) {
-            texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
+            texte_tentatives.setText("Tentative : " + essais + " / " + maxEssais);
             bouton_valide.setEnabled(false);
-            score += 1;
-            texte_score.setText("Score :" +score);
+            score ++;
+            texte_score.setText("Score : " +score);
         } else if (essais >= maxEssais) {
             texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
             bouton_valide.setEnabled(false);
-            score += 0;
-            texte_score.setText(String.valueOf("Score :" +score));
+            texte_score.setText(String.valueOf("Score : " + "" +score));
             
         } else {
             texte_tentatives.setText("Tentative :" + essais + " / " + maxEssais);
             
         }
-
-
-
 
         texte_lbl_nb_chiffres_haut.setText("A monter :");
         texte_lbl_nb_chiffres_bas.setText("A descendre :");
@@ -352,6 +345,7 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
