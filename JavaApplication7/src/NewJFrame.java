@@ -61,6 +61,7 @@ public class NewJFrame extends javax.swing.JFrame {
         bouton_valide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         texte_intro.setText("Trouve la bonne combinaison....");

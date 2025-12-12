@@ -7,20 +7,14 @@
  *
  * @author evada
  */
-import javax.swing.SwingUtilities;
-
-public class page_accueil extends javax.swing.JFrame {
-
+public class page_resultat extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(page_accueil.class.getName());
-    
-
-         
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(page_resultat.class.getName());
 
     /**
-     * Creates new form page_accueil
+     * Creates new form page_resultat
      */
-    public page_accueil() {
+    public page_resultat() {
         initComponents();
     }
 
@@ -33,35 +27,38 @@ public class page_accueil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bouton_commencer = new javax.swing.JButton();
-        texte_intro = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        texte_victoire = new javax.swing.JLabel();
+        texte_defaite = new javax.swing.JLabel();
+        texte_resultat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bouton_commencer.setText("COMMENCER");
-        bouton_commencer.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bouton_commencerActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton_commencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 89, -1, -1));
 
-        texte_intro.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        texte_intro.setText("<html>Vous allez devoir trouvez une combinaison de 4 chiffres. Pour cela vous aurez 10 tentatives...  je vous conseille de vous aider des indices.</html>");
-        texte_intro.setToolTipText("");
-        texte_intro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 320, 110));
+        texte_victoire.setText("jLabel1");
+        getContentPane().add(texte_victoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 37, -1));
+
+        texte_defaite.setText("jLabel2");
+        getContentPane().add(texte_defaite, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 37, -1));
+
+        texte_resultat.setText("jLabel3");
+        getContentPane().add(texte_resultat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 37, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bouton_commencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_commencerActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new NewJFrame().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_bouton_commencerActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,16 +80,15 @@ public class page_accueil extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
-
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new page_accueil().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new page_resultat().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bouton_commencer;
-    private javax.swing.JLabel texte_intro;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel texte_defaite;
+    private javax.swing.JLabel texte_resultat;
+    private javax.swing.JLabel texte_victoire;
     // End of variables declaration//GEN-END:variables
 }
