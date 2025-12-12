@@ -265,26 +265,26 @@ public class NewJFrame extends javax.swing.JFrame {
         int[] code = combinaisonSecrete.getChiffres();
                
         essais++;
-
-        StringBuilder monter = new StringBuilder();
-        StringBuilder descendre = new StringBuilder();
-        StringBuilder exact = new StringBuilder();
        
         tentative[0] = Integer.parseInt(texte_chiffre_0.getText());
         tentative[1] = Integer.parseInt(texte_chiffre_1.getText());
         tentative[2] = Integer.parseInt(texte_chiffre_2.getText());
         tentative[3] = Integer.parseInt(texte_chiffre_3.getText());
+        
+        int nbMonter = 0;
+        int nbDescendre = 0;
+        int nbExacts = 0;
        
         for (int i = 0; i < code.length; i++) {
             if (tentative[i] < code[i]) {
-                monter.append("C").append(i+1).append(" ");
+                nbMonter++;
             } else if (tentative[i] > code[i]) {
-                descendre.append("C").append(i+1).append(" ");
+                nbDescendre++;
             } else {
-                exact.append("C").append(i+1).append(" ");
+                nbExacts++;
             }
         }
-
+          
         if (combinaisonSecrete.verifier(tentative)) {
             texte_tentatives.setText("Tentative : " + essais + " / " + maxEssais);
             bouton_valide.setEnabled(false);
@@ -303,9 +303,9 @@ public class NewJFrame extends javax.swing.JFrame {
         texte_lbl_nb_chiffres_haut.setText("A monter :");
         texte_lbl_nb_chiffres_bas.setText("A descendre :");
         texte_lbl_nb_chiffres_exacts.setText("Chiffres exacts :");
-        texte_nb_chiffres_haut.setText(monter.toString());
-        texte_nb_chiffres_bas.setText(descendre.toString());
-        texte_nb_chiffres_exacts.setText(exact.toString());
+        texte_nb_chiffres_haut.setText(String.valueOf(nbMonter));
+        texte_nb_chiffres_bas.setText(String.valueOf(nbDescendre));
+        texte_nb_chiffres_exacts.setText(String.valueOf(nbExacts));
       
     }//GEN-LAST:event_bouton_valideActionPerformed
 
