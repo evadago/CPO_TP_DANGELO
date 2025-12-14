@@ -7,6 +7,8 @@
  *
  * @author evada
  */
+import java.awt.Color;
+
 public class NewJFrame extends javax.swing.JFrame {
     private int[] tentative = new int[4];
     private int essais = 0;
@@ -25,6 +27,8 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        getContentPane().setBackground(Color.PINK);
+        setSize(600, 300);
     }
     
     /**

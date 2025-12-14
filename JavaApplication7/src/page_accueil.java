@@ -8,6 +8,8 @@
  * @author evada
  */
 import javax.swing.SwingUtilities;
+import java.awt.Color;
+
 
 public class page_accueil extends javax.swing.JFrame {
 
@@ -22,6 +24,10 @@ public class page_accueil extends javax.swing.JFrame {
      */
     public page_accueil() {
         initComponents();
+        getContentPane().setBackground(Color.PINK);
+        setSize(600, 300);
+
+
     }
 
     /**
@@ -38,6 +44,8 @@ public class page_accueil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bouton_commencer.setText("COMMENCER");
@@ -46,13 +54,13 @@ public class page_accueil extends javax.swing.JFrame {
                 bouton_commencerActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton_commencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
+        getContentPane().add(bouton_commencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
 
         texte_intro.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         texte_intro.setText("<html>Vous allez devoir trouvez une combinaison de 4 chiffres. Pour cela vous aurez 10 tentatives...  je vous conseille de vous aider des indices.</html>");
         texte_intro.setToolTipText("");
         texte_intro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 320, 110));
+        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 380, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
