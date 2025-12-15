@@ -106,16 +106,18 @@ public class Interface extends javax.swing.JFrame {
     
     private void verifierReponse(int choixUtilisateur) {
     
-        if (choixUtilisateur == Question.getindexBonneReponse()) {
-            Message_feedback.setText("Bonne réponse !");
-            score++;
-        } else {
-            Message_feedback.setText("Mauvaise réponse...");
-        }
+        Question question = Question.get(indexQuestionCourante);
+        Intitule_question.setText(question.getIntitule());
+        P1.setText(question.getP1());
+        P2.setText(question.getP2());
+        P3.setText(question.getP3());
+        P4.setText(question.getP4());
+       
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
 
-    
-   
-    
 }
 
             
@@ -134,6 +136,8 @@ public class Interface extends javax.swing.JFrame {
         P3 = new javax.swing.JButton();
         P4 = new javax.swing.JButton();
         Message_feedback = new javax.swing.JLabel();
+        Bt_suivant = new javax.swing.JButton();
+        Score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,33 +183,133 @@ public class Interface extends javax.swing.JFrame {
         Message_feedback.setText("jLabel1");
         getContentPane().add(Message_feedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
+        Bt_suivant.setText("Suivant");
+        Bt_suivant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_suivantActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Bt_suivant, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+
+        Score.setText("Score");
+        getContentPane().add(Score, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P1ActionPerformed
         // TODO add your handling code here:
-        verifierReponse(1);
+         int numero = 1 ;
+       
+        Question question = Question.get(indexQuestionCourante);
+       
+        if (numero == question.getIndexBonneReponse()) {
+            Message_feedback.setText("Bonne réponse");
+            score++;
+        } else {
+            Message_feedback.setText("Mauvaise réponse");
+        }
         P1.setEnabled(false);
+        P2.setEnabled(false);
+        P3.setEnabled(false);
+        P4.setEnabled(false);
+   
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
        
     }//GEN-LAST:event_P1ActionPerformed
 
     private void P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ActionPerformed
         // TODO add your handling code here:
-        verifierReponse(2);
+        int numero = 2 ;
+       
+        Question question = Question.get(indexQuestionCourante);
+       
+        if (numero == question.getIndexBonneReponse()) {
+            Message_feedback.setText("Bonne réponse !");
+            score++;
+        } else {
+            Message_feedback.setText("Mauvaise réponse !");
+        }  
+       
+        P1.setEnabled(false);
         P2.setEnabled(false);
+        P3.setEnabled(false);
+        P4.setEnabled(false);
+       
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
     }//GEN-LAST:event_P2ActionPerformed
 
     private void P3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P3ActionPerformed
         // TODO add your handling code here:
-        verifierReponse(3);
+         int numero = 3 ;
+       
+        Question question = Question.get(indexQuestionCourante);
+       
+        if (numero == question.getIndexBonneReponse()) {
+            Message_feedback.setText("Bonne réponse !");
+            score++;
+        } else {
+            Message_feedback.setText("Mauvaise réponse !");
+        }  
+        P1.setEnabled(false);
+        P2.setEnabled(false);
         P3.setEnabled(false);
+        P4.setEnabled(false);
+       
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
     }//GEN-LAST:event_P3ActionPerformed
 
     private void P4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P4ActionPerformed
         // TODO add your handling code here:
-        verifierReponse(4);
+        int numero = 1 ;
+       
+        Question question = Question.get(indexQuestionCourante);
+       
+        if (numero == question.getIndexBonneReponse()) {
+            Message_feedback.setText("Bonne réponse !");
+            score++;
+        } else {
+            Message_feedback.setText("Mauvaise réponse !");
+        }  
+        P1.setEnabled(false);
+        P2.setEnabled(false);
+        P3.setEnabled(false);
         P4.setEnabled(false);
+       
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
     }//GEN-LAST:event_P4ActionPerformed
+
+    private void Bt_suivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_suivantActionPerformed
+        // TODO add your handling code here:
+         indexQuestionCourante ++;
+       
+        if (indexQuestionCourante < Question.size()) {
+            afficherQuestionCourante() ;
+        } else {
+            Score.setText("Score : " + score + " / " + Question.size()) ;
+        }
+        P1.setEnabled(false);
+        P2.setEnabled(false);
+        P3.setEnabled(false);
+        P4.setEnabled(false);
+       
+        P1.setEnabled(true);
+        P2.setEnabled(true);
+        P3.setEnabled(true);
+        P4.setEnabled(true);
+    }//GEN-LAST:event_Bt_suivantActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,11 +336,13 @@ public class Interface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Interface().setVisible(true));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bt_suivant;
     private javax.swing.JLabel Intitule_question;
     private javax.swing.JLabel Message_feedback;
     private javax.swing.JButton P1;
     private javax.swing.JButton P2;
     private javax.swing.JButton P3;
     private javax.swing.JButton P4;
+    private javax.swing.JLabel Score;
     // End of variables declaration//GEN-END:variables
 }
