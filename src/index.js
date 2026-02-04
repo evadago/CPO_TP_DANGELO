@@ -159,7 +159,9 @@ function update() {
 
   if (gameOver) {
     return;
+    
   }
+
 
 
 }
