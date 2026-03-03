@@ -45,6 +45,14 @@ var zone_texte_score;
 
 var groupe_bombes;
 var gameOver = false;
+var texteGameOver;
+var boutonRecommencer;
+
+
+
+
+
+
 
 /***********************************************************************/
 /** FONCTION PRELOAD
@@ -55,21 +63,18 @@ var gameOver = false;
  * On y trouve surtout le chargement des assets (images, son ..)
  */
 function preload() {
-  //this.load.image("img_ciel", "src/assets/sky.png");
-  //this.load.image("img_plateforme", "src/assets/platform.png");
-  // changement de jeu de tuiles
-  this.load.image("Phaser_tuilesdejeu", "src/assets/tuilesJeu.png");
+  this.load.image("img_ciel", "src/assets/sky.png");
+  this.load.image("img_plateforme", "src/assets/platform.png");
 
-  // chargement de la carte
-  this.load.tilemapTiledJSON("carte", "src/assets/map.json"); 
-  
   this.load.spritesheet("img_perso", "src/assets/dude.png", {
       frameWidth: 32,
       frameHeight: 48
     });
 
   this.load.image("img_etoile", "src/assets/star.png");
-   
+  this.load.image("img_bombe", "src/assets/bomb.png");
+  this.load.audio('jump', 'src/assets/jump_sound.mp3');
+  this.load.audio('explosion', 'src/assets/explosion_sound.mp3');   
 }
 
 /***********************************************************************/
@@ -83,56 +88,22 @@ function preload() {
  * ainsi que toutes les instructions permettant de planifier des evenements
  */
 function create() {
-  //this.add.image(400, 300, "img_ciel");
-  //groupe_plateformes = this.physics.add.staticGroup();
-  //groupe_plateformes.create(200, 584, "img_plateforme");
-  //groupe_plateformes.create(600, 584, "img_plateforme");
-  //groupe_plateformes.create(50, 300, "img_plateforme");
-  //groupe_plateformes.create(600, 450, "img_plateforme");
-  //groupe_plateformes.create(750, 270, "img_plateforme");
+  score = 0;
+  gameOver = false;
 
-  // chargement de la carte
-  const carteDuNiveau = this.add.tilemap("carte");
-
-  // chargement du jeu de tuiles
-  const tileset = carteDuNiveau.addTilesetImage(
-          "tuiles_de_jeu",
-          "Phaser_tuilesdejeu"
-        );  
-  // chargement du calque calque_background
-  const calque_background = carteDuNiveau.createLayer(
-          "calque_background",
-          tileset
-        );
-
-  // chargement du calque calque_background_2
-  const calque_background_2 = carteDuNiveau.createLayer(
-          "calque_background_2",
-          tileset
-        );
-
-  // chargement du calque calque_plateformes
-  const calque_plateformes = carteDuNiveau.createLayer(
-          "calque_tuiles",
-          tileset
-        );  
+  this.add.image(400, 300, "img_ciel");
+  groupe_plateformes = this.physics.add.staticGroup();
+  groupe_plateformes.create(200, 584, "img_plateforme");
+  groupe_plateformes.create(600, 584, "img_plateforme");
+  groupe_plateformes.create(50, 300, "img_plateforme");
+  groupe_plateformes.create(600, 450, "img_plateforme");
+  groupe_plateformes.create(750, 270, "img_plateforme");
 
   player = this.physics.add.sprite(100, 450, 'img_perso');
   player.setCollideWorldBounds(true);
-  //this.physics.add.collider(player, groupe_plateformes);
-  // ajout d'une collision entre le joueur et le calque plateformes
-  this.physics.add.collider(player, calque_plateformes); 
+  this.physics.add.collider(player, groupe_plateformes);
   player.setBounce(0.2);
 
-  // définition des tuiles de plateformes qui sont solides
-  // utilisation de la propriété estSolide
-  calque_plateformes.setCollisionByProperty({ estSolide: true }); 
-  // redimentionnement du monde avec les dimensions calculées via tiled
-  this.physics.world.setBounds(0, 0, 3200, 640);
-  //  ajout du champs de la caméra de taille identique à celle du monde
-  this.cameras.main.setBounds(0, 0, 3200, 640);
-  // ancrage de la caméra sur le joueur
-  this.cameras.main.startFollow(player);
   clavier = this.input.keyboard.createCursorKeys();
 
   this.anims.create({
@@ -160,7 +131,7 @@ function create() {
     var coordX = 70 + 70 * i;
     groupe_etoiles.create(coordX, 10, "img_etoile");
   }
-  this.physics.add.collider(groupe_etoiles, calque_plateformes);
+  this.physics.add.collider(groupe_etoiles, groupe_plateformes);
 
   groupe_etoiles.children.iterate(function iterateur(etoile_i) {
     var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
@@ -169,64 +140,39 @@ function create() {
 
   this.physics.add.overlap(player, groupe_etoiles, ramasserEtoile, null, this);
 
-  zone_texte_score = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+  zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+
+  texteGameOver = this.add.text(400, 220, "GAME OVER", {
+    fontSize: "56px",
+    fill: "#ff0000"
+  }).setOrigin(0.5).setVisible(false);
+
+  boutonRecommencer = this.add.text(400, 300, "Recommencer", {
+    fontSize: "36px",
+    fill: "#ffffff",
+    backgroundColor: "#000000",
+    padding: { x: 16, y: 10 }
+  })
+    .setOrigin(0.5)
+    .setVisible(false)
+    .setInteractive({ useHandCursor: true });
+
+  boutonRecommencer.on("pointerover", function () {
+    boutonRecommencer.setStyle({ fill: "#ffff66" });
+  });
+
+  boutonRecommencer.on("pointerout", function () {
+    boutonRecommencer.setStyle({ fill: "#ffffff" });
+  });
+
+  boutonRecommencer.on("pointerdown", () => {
+    this.scene.restart();
+  });
 
   groupe_bombes = this.physics.add.group();
-  this.physics.add.collider(groupe_bombes, calque_plateformes);
+  this.physics.add.collider(groupe_bombes, groupe_plateformes);
 
   this.physics.add.collider(player, groupe_bombes, chocAvecBombe, null, this);
-
-
-  
-    
-
-      
-}
-
-/***********************************************************************/
-/** FONCTION UPDATE
-/***********************************************************************/
-
-function update() {
-  if (clavier.right.isDown == true) {
-    player.setVelocityX(160);
-    player.anims.play('anim_tourne_droite', true);
-  }
-  else if ( clavier.left.isDown == true ) {
-    player.setVelocityX(-160);
-    player.anims.play('anim_tourne_gauche', true);
-  } else {
-    player.setVelocityX(0);
-    player.anims.play('anim_face');
-  }
-
-
-  if (clavier.up.isDown == true && player.body.blocked.down) {
-    player.setVelocityY(-200);
-  }
-
-  if (gameOver) {
-    return;
-    
-  }
-
-
-
-}
- 
-
-function ramasserEtoile(un_player, une_etoile) {
- une_etoile.disableBody(true, true);
-
-  if (groupe_etoiles.countActive(true) === 0) {
-    groupe_etoiles.children.iterate(function iterateur(etoile_i) {
-      etoile_i.enableBody(true, etoile_i.x, 0, true, true);
-    });
-  }
-
-  score += 10;
-  zone_texte_score.setText("Score: " + score);
-
   var x;
   if (player.x < 400) {
     x = Phaser.Math.Between(400, 800);
@@ -238,12 +184,66 @@ function ramasserEtoile(un_player, une_etoile) {
   une_bombe.setCollideWorldBounds(true);
   une_bombe.setVelocity(Phaser.Math.Between(-200, 200), 20);
   une_bombe.allowGravity = false;
+
+
+
+
+  
+
 }
 
+/***********************************************************************/
+/** FONCTION UPDATE
+/***********************************************************************/
 
-function chocAvecBombe(un_player, une_bombe) {
+function update() {
+  if (gameOver) {
+    return;
+  }
+
+  if (clavier.right.isDown == true) {
+    player.setVelocityX(160);
+    player.anims.play('anim_tourne_droite', true);
+  }
+  else if (clavier.left.isDown == true ) {
+    player.setVelocityX(-160);
+    player.anims.play('anim_tourne_gauche', true);
+  } else {
+    player.setVelocityX(0);
+    player.anims.play('anim_face');
+  }
+
+  if (clavier.space.isDown == true && player.body.touching.down) {
+    player.setVelocityY(-330);
+
+  }
+
+}
+ 
+function ramasserEtoile(player, une_etoile) {
+ une_etoile.disableBody(true, true);
+ this.sound.play('jump');
+
+
+
+
+  if (groupe_etoiles.countActive(true) === 0) {
+    groupe_etoiles.children.iterate(function iterateur(etoile_i) {
+      etoile_i.enableBody(true, etoile_i.x, 0, true, true);
+      
+    });
+  }
+
+  score += 10;
+  zone_texte_score.setText("Score: " + score);
+}
+
+function chocAvecBombe(player, une_bombe) {
  this.physics.pause();
  player.setTint(0xff0000);
  player.anims.play("anim_face");
  gameOver = true;
+ this.sound.play('explosion');
+ texteGameOver.setVisible(true);
+ boutonRecommencer.setVisible(true);
 }
